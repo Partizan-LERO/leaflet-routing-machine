@@ -19,6 +19,7 @@
 	module.exports = L.Class.extend({
 		options: {
 			serviceUrl: 'https://router.project-osrm.org/route/v1',
+			jwt: false,
 			profile: 'driving',
 			timeout: 30 * 1000,
 			routingOptions: {
@@ -342,6 +343,7 @@
 
 			return this.options.serviceUrl + '/' + this.options.profile + '/' +
 				locs.join(';') + '?' +
+                (this.options.jwt) ? ('token=' + this.options.jwt + '&') : '' +
 				(options.geometryOnly ? (options.simplifyGeometry ? '' : 'overview=full') : 'overview=false') +
 				'&alternatives=' + computeAlternative.toString() +
 				'&steps=' + computeInstructions.toString() +
